@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -62,6 +64,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\OneToOne(targetEntity=Client::class, mappedBy="account", cascade={"persist", "remove"})
      */
     private $client;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Checkup::class, mappedBy="doctor")
+     */
+    private $checkups;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Payment::class, mappedBy="registrar")
+     */
+    private $payments;
+
+    public function __construct()
+    {
+        $this->checkups = new ArrayCollection();
+        $this->payments = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -215,6 +233,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         $this->client = $client;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Checkup[]
+     */
+    public function getCheckups(): Collection
+    {
+        return $this->checkups;
+    }
+
+    public function addCheckup(Checkup $checkup): self
+    {
+        if (!$this->checkups->contains($checkup)) {
+            $this->checkups[] = $checkup;
+            $checkup->setDoctor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCheckup(Checkup $checkup): self
+    {
+        if ($this->checkups->removeElement($checkup)) {
+            // set the owning side to null (unless already changed)
+            if ($checkup->getDoctor() === $this) {
+                $checkup->setDoctor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Payment[]
+     */
+    public function getPayments(): Collection
+    {
+        return $this->payments;
+    }
+
+    public function addPayment(Payment $payment): self
+    {
+        if (!$this->payments->contains($payment)) {
+            $this->payments[] = $payment;
+            $payment->setRegistrar($this);
+        }
+
+        return $this;
+    }
+
+    public function removePayment(Payment $payment): self
+    {
+        if ($this->payments->removeElement($payment)) {
+            // set the owning side to null (unless already changed)
+            if ($payment->getRegistrar() === $this) {
+                $payment->setRegistrar(null);
+            }
+        }
 
         return $this;
     }

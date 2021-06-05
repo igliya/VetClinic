@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ClientRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -32,6 +34,22 @@ class Client
      * @ORM\JoinColumn(nullable=false)
      */
     private $account;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Pet::class, mappedBy="client")
+     */
+    private $pets;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Payment::class, mappedBy="client")
+     */
+    private $payments;
+
+    public function __construct()
+    {
+        $this->pets = new ArrayCollection();
+        $this->payments = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -70,6 +88,66 @@ class Client
     public function setAccount(User $account): self
     {
         $this->account = $account;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Pet[]
+     */
+    public function getPets(): Collection
+    {
+        return $this->pets;
+    }
+
+    public function addPet(Pet $pet): self
+    {
+        if (!$this->pets->contains($pet)) {
+            $this->pets[] = $pet;
+            $pet->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removePet(Pet $pet): self
+    {
+        if ($this->pets->removeElement($pet)) {
+            // set the owning side to null (unless already changed)
+            if ($pet->getOwner() === $this) {
+                $pet->setOwner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Payment[]
+     */
+    public function getPayments(): Collection
+    {
+        return $this->payments;
+    }
+
+    public function addPayment(Payment $payment): self
+    {
+        if (!$this->payments->contains($payment)) {
+            $this->payments[] = $payment;
+            $payment->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removePayment(Payment $payment): self
+    {
+        if ($this->payments->removeElement($payment)) {
+            // set the owning side to null (unless already changed)
+            if ($payment->getClient() === $this) {
+                $payment->setClient(null);
+            }
+        }
 
         return $this;
     }
