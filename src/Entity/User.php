@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
- * @UniqueEntity(fields={"email"}, message="Аккаунт с указанным email уже существует")
+ * @UniqueEntity(fields={"login"}, message="Аккаунт с указанным логином уже существует")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -25,7 +25,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=255, unique=true)
      */
-    private $email;
+    private $login;
 
     /**
      * @ORM\Column(type="json")
@@ -59,28 +59,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $phone;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\OneToOne(targetEntity=Client::class, mappedBy="account", cascade={"persist", "remove"})
      */
-    private $address;
-
-    /**
-     * @ORM\Column(type="string", length=10)
-     */
-    private $passport;
+    private $client;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getEmail(): ?string
+    public function getLogin(): ?string
     {
-        return $this->email;
+        return $this->login;
     }
 
-    public function setEmail(string $email): self
+    public function setLogin(string $login): self
     {
-        $this->email = $email;
+        $this->login = $login;
 
         return $this;
     }
@@ -92,7 +87,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+        return (string) $this->login;
     }
 
     /**
@@ -151,7 +146,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getUsername()
     {
-        // TODO: Implement getUsername() method.
+        return $this->lastName . ' ' . $this->firstName;
     }
 
     public function getFirstName(): ?string
@@ -202,32 +197,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getAddress(): ?string
-    {
-        return $this->address;
-    }
-
-    public function setAddress(?string $address): self
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    public function getPassport(): ?string
-    {
-        return $this->passport;
-    }
-
-    public function setPassport(?string $passport): self
-    {
-        $this->passport = $passport;
-
-        return $this;
-    }
-
     public function __toString()
     {
-        return $this->email;
+        return $this->login;
+    }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(Client $client): self
+    {
+        // set the owning side of the relation if necessary
+        if ($client->getAccount() !== $this) {
+            $client->setAccount($this);
+        }
+
+        $this->client = $client;
+
+        return $this;
     }
 }
