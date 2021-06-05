@@ -215,11 +215,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function __toString()
-    {
-        return $this->login;
-    }
-
     public function getClient(): ?Client
     {
         return $this->client;
@@ -227,7 +222,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setClient(Client $client): self
     {
-        // set the owning side of the relation if necessary
         if ($client->getAccount() !== $this) {
             $client->setAccount($this);
         }
@@ -258,7 +252,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeCheckup(Checkup $checkup): self
     {
         if ($this->checkups->removeElement($checkup)) {
-            // set the owning side to null (unless already changed)
             if ($checkup->getDoctor() === $this) {
                 $checkup->setDoctor(null);
             }
@@ -288,12 +281,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removePayment(Payment $payment): self
     {
         if ($this->payments->removeElement($payment)) {
-            // set the owning side to null (unless already changed)
             if ($payment->getRegistrar() === $this) {
                 $payment->setRegistrar(null);
             }
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->login;
     }
 }

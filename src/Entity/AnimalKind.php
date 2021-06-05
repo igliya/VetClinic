@@ -72,12 +72,16 @@ class AnimalKind
     public function removePet(Pet $pet): self
     {
         if ($this->pets->removeElement($pet)) {
-            // set the owning side to null (unless already changed)
             if ($pet->getKind() === $this) {
                 $pet->setKind(null);
             }
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

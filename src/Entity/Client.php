@@ -25,7 +25,7 @@ class Client
     private $address;
 
     /**
-     * @ORM\Column(type="string", length=10, unique=true)
+     * @ORM\Column(type="string", length=10)
      */
     private $passport;
 
@@ -113,7 +113,6 @@ class Client
     public function removePet(Pet $pet): self
     {
         if ($this->pets->removeElement($pet)) {
-            // set the owning side to null (unless already changed)
             if ($pet->getOwner() === $this) {
                 $pet->setOwner(null);
             }
@@ -143,12 +142,16 @@ class Client
     public function removePayment(Payment $payment): self
     {
         if ($this->payments->removeElement($payment)) {
-            // set the owning side to null (unless already changed)
             if ($payment->getClient() === $this) {
                 $payment->setClient(null);
             }
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->passport;
     }
 }

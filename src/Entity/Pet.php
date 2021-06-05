@@ -142,12 +142,16 @@ class Pet
     public function removeCheckup(Checkup $checkup): self
     {
         if ($this->checkups->removeElement($checkup)) {
-            // set the owning side to null (unless already changed)
             if ($checkup->getPet() === $this) {
                 $checkup->setPet(null);
             }
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }
