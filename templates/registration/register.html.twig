@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+    <!-- Registration start -->
+    <div class="container">
+        <div class="title">Регистрация</div>
+        <div class="content">
+            {{ form_start(registrationForm) }}
+            {% set formErrors = registrationForm.vars.errors.form.getErrors(true) %}
+            {% if formErrors|length %}
+                <div class="user-details">
+                    <ul>
+                        {% for error in formErrors %}
+                            <li class="register-errors">
+                                ● {{ error.message }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            <div class="user-details">
+                <div class="input-box">
+                    <span class="details">Логин</span>
+                    {{ form_widget(registrationForm.login) }}
+                </div>
+                <div class="input-box">
+                    <span class="details">Номер телефона</span>
+                    {{ form_widget(registrationForm.phone) }}
+                </div>
+                <div class="input-box">
+                    <span class="details">Пароль</span>
+                    {{ form_widget(registrationForm.plainPassword.first) }}
+                </div>
+                <div class="input-box">
+                    <span class="details">Подтверждение пароля</span>
+                    {{ form_widget(registrationForm.plainPassword.second) }}
+                </div>
+                <div class="input-box">
+                    <span class="details">Имя</span>
+                    {{ form_widget(registrationForm.firstName) }}
+                </div>
+                <div class="input-box">
+                    <span class="details">Фамилия</span>
+                    {{ form_widget(registrationForm.lastName) }}
+                </div>
+                <div class="input-box">
+                    <span class="details">Отчество</span>
+                    {{ form_widget(registrationForm.patronymic) }}
+                </div>
+                <div class="input-box">
+                    <span class="details">Адрес</span>
+                    {{ form_widget(registrationForm.address) }}
+                </div>
+                <div class="input-box">
+                    <span class="details">Серия и номер паспорта</span>
+                    {{ form_widget(registrationForm.passport) }}
+                </div>
+                <div class="checkbox">
+                    {{ form_widget(registrationForm.agreeTerms) }}
+                    {{ form_label(registrationForm.agreeTerms, null, {'label_attr':{'class':'checkbox-label'}}) }}
+                </div>
+            </div>
+            <div class="button">
+                <input type="submit" value="Зарегистрироваться">
+            </div>
+            {{ form_end(registrationForm) }}
+        </div>
+    </div>
+    <!-- Registration end -->
+{% endblock %}
