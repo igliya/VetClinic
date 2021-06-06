@@ -21,6 +21,9 @@ class RegistrationController extends AbstractController
     {
         // если пользователь уже зашёл, то перенаправляем его на главную страницу
         if (null !== $this->getUser()) {
+            if ($this->isGranted('ROLE_ADMIN')) {
+                return $this->redirectToRoute('app_admin');
+            }
             return new RedirectResponse($this->generateUrl('app_home'));
         }
         $user = new User();

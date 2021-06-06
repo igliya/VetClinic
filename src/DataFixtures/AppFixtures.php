@@ -67,6 +67,7 @@ class AppFixtures extends Fixture
         $admin->setPassword($this->passwordEncoder->encodePassword($admin, 'Admin!123'));
         $admin->setLastName('Администратор');
         $admin->setFirstName('');
+        $admin->setPatronymic('');
         $admin->setPhone('+7(900)123-1010');
         $admin->setRoles(['ROLE_ADMIN']);
         $manager->persist($admin);
@@ -134,10 +135,12 @@ class AppFixtures extends Fixture
         // создаём вид кошки
         $catKind = new AnimalKind();
         $catKind->setName('Кошка');
+        $catKind->setStatus(true);
         $manager->persist($catKind);
         foreach ($kinds as $data) {
             $kind = new AnimalKind();
             $kind->setName($data);
+            $kind->setStatus(true);
             $manager->persist($kind);
         }
 

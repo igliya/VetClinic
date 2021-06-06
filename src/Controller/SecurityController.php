@@ -16,6 +16,9 @@ class SecurityController extends AbstractController
     {
         // если пользователь уже зашёл, то перенаправляем его на главную страницу
         if ($this->getUser()) {
+            if ($this->isGranted('ROLE_ADMIN')) {
+                return $this->redirectToRoute('app_admin');
+            }
             return $this->redirectToRoute('app_home');
         }
         $error = $authenticationUtils->getLastAuthenticationError();
