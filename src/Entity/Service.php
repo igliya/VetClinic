@@ -6,6 +6,7 @@ use App\Repository\ServiceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ServiceRepository::class)
@@ -20,11 +21,13 @@ class Service
     private $id;
 
     /**
+     * @Assert\Length(max=255, maxMessage="Название услуги должно быть не более {{ limit }} символов")
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
+     * @Assert\PositiveOrZero(message="Значение должно быть неотрицательным")
      * @ORM\Column(type="float")
      */
     private $price;

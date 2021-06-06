@@ -36,7 +36,7 @@ class Client
     private $account;
 
     /**
-     * @ORM\OneToMany(targetEntity=Pet::class, mappedBy="client")
+     * @ORM\OneToMany(targetEntity=Pet::class, mappedBy="owner")
      */
     private $pets;
 
