@@ -39,7 +39,7 @@ class Payment
     private $client;
 
     /**
-     * @ORM\OneToOne(targetEntity=Checkup::class, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Checkup::class, inversedBy="payment")
      * @ORM\JoinColumn(nullable=false)
      */
     private $checkup;
