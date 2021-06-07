@@ -151,6 +151,7 @@ class AppFixtures extends Fixture
         $pet1->setKind($catKind);
         $pet1->setBirthday(new \DateTime('25-09-2018'));
         $pet1->setSex(false);
+        $pet1->setStatus(true);
         $manager->persist($pet1);
         $pet2 = new Pet();
         $pet2->setOwner($client);
@@ -158,6 +159,7 @@ class AppFixtures extends Fixture
         $pet2->setKind($catKind);
         $pet2->setBirthday(new \DateTime('22-01-2019'));
         $pet2->setSex(false);
+        $pet2->setStatus(true);
         $manager->persist($pet2);
 
         // создаём приём

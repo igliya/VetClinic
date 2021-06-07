@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210605234038 extends AbstractMigration
+final class Version20210607163523 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -40,7 +40,7 @@ final class Version20210605234038 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_6D28840D19EB6921 ON payment (client_id)');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_6D28840DBD8A2086 ON payment (checkup_id)');
         $this->addSql('CREATE INDEX IDX_6D28840DD1AA2FC1 ON payment (registrar_id)');
-        $this->addSql('CREATE TABLE pet (id INT NOT NULL, owner_id INT NOT NULL, kind_id INT NOT NULL, name VARCHAR(255) NOT NULL, birthday DATE NOT NULL, sex BOOLEAN NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE pet (id INT NOT NULL, owner_id INT NOT NULL, kind_id INT NOT NULL, name VARCHAR(50) NOT NULL, birthday DATE NOT NULL, sex BOOLEAN NOT NULL, status BOOLEAN NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_E4529B857E3C61F9 ON pet (owner_id)');
         $this->addSql('CREATE INDEX IDX_E4529B8530602CA9 ON pet (kind_id)');
         $this->addSql('CREATE TABLE service (id INT NOT NULL, name VARCHAR(255) NOT NULL, price DOUBLE PRECISION NOT NULL, status BOOLEAN NOT NULL, PRIMARY KEY(id))');

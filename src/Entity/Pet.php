@@ -20,7 +20,7 @@ class Pet
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=50)
      */
     private $name;
 
@@ -50,6 +50,11 @@ class Pet
      * @ORM\OneToMany(targetEntity=Checkup::class, mappedBy="pet")
      */
     private $checkups;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $status;
 
     public function __construct()
     {
@@ -146,6 +151,18 @@ class Pet
                 $checkup->setPet(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStatus(): ?bool
+    {
+        return $this->status;
+    }
+
+    public function setStatus(bool $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }
