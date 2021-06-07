@@ -34,7 +34,13 @@
                     <td>{{ checkup.doctor.username }}</td>
                     <td>{{ checkup.date|date('d.m.Y h:i')  }}</td>
                     <td>{{ checkup.status }}</td>
-                    <td><a href="{{ path('checkup_cancel', { id: checkup.id }) }}" onclick="return confirm('Вы действительно хотите отменить данный приём?')" class="btn">Отменить</a></td>
+                    {% if checkup.status is same as 'Назначен' %}
+                        <td><a href="{{ path('checkup_cancel', { id: checkup.id }) }}" onclick="return confirm('Вы действительно хотите отменить данный приём?')" class="btn">Отменить</a></td>
+                    {% elseif checkup.status is same as 'Ожидает оплаты' %}
+                        <td><a href="{{ path('checkup_pay', { id: checkup.id }) }}" onclick="return confirm('К оплате {{ checkup.calculateSum() }} рублей. Оплатить данный приём?')" class="btn">Оплатить</a></td>
+                    {% else %}
+                        <td></td>
+                    {% endif %}
                 </tr>
             {% endfor %}
             </tbody>

@@ -2,8 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Payment;
 use App\Repository\CheckupRepository;
-use App\Repository\ClientRepository;
+use App\Repository\PaymentRepository;
 use App\Repository\PetRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -32,7 +33,6 @@ class ProfileController extends AbstractController
      */
     public function pets(
         PetRepository $petRepository,
-        ClientRepository $clientRepository,
         PaginatorInterface $paginator,
         Request $request
     ): Response {
@@ -62,7 +62,6 @@ class ProfileController extends AbstractController
     public function checkups(
         PetRepository $petRepository,
         CheckupRepository $checkupRepository,
-        ClientRepository $clientRepository,
         PaginatorInterface $paginator,
         Request $request
     ): Response {
@@ -70,7 +69,9 @@ class ProfileController extends AbstractController
         $pets = $petRepository->getPetsPaginationQuery($this->getUser()->getClient())->getResult();
         $pagination = null;
         if ($pets) {
-            $checkupsQuery = $checkupRepository->getCheckupsHistoryPaginationQuery($pets, ['Назначен']);
+            $checkupsQuery = $checkupRepository->getCheckupsHistoryPaginationQuery($pets, [
+                'Назначен', 'Ожидает оплаты', 'Оплачен',
+            ]);
             // получаем номер страницы
             $pageNumber = $request->query->getInt('page', 1);
             // проверяем номер страницы
@@ -91,9 +92,38 @@ class ProfileController extends AbstractController
     }
 
     /**
+     * @Route("/checkups/pay/{id}", name="checkup_pay")
+     */
+    public function checkupPay(
+        CheckupRepository $checkupRepository,
+        EntityManagerInterface $manager,
+        int $id
+    ): Response {
+        $checkup = $checkupRepository->find($id);
+        if ($checkup) {
+            $checkup->setStatus('Оплачен');
+            $manager->persist($checkup);
+            $payment = new Payment();
+            $payment->setCheckup($checkup);
+            $payment->setClient($checkup->getPet()->getOwner());
+            $payment->setSum($checkup->calculateSum());
+            $payment->setDate(new \DateTime());
+            $payment->setStatus('Ожидает подтверждения');
+            $manager->persist($payment);
+            $manager->flush();
+        }
+
+        return $this->redirectToRoute('client_checkups');
+    }
+
+    /**
      * @Route("/checkups/cancel/{id}", name="checkup_cancel")
      */
-    public function checkupsCancel(CheckupRepository $checkupRepository, EntityManagerInterface $manager, int $id): Response {
+    public function checkupCancel(
+        CheckupRepository $checkupRepository,
+        EntityManagerInterface $manager,
+        int $id
+    ): Response {
         $checkup = $checkupRepository->find($id);
         if ($checkup) {
             $checkup->setStatus('Отменён');
@@ -110,7 +140,6 @@ class ProfileController extends AbstractController
     public function checkupsHistory(
         PetRepository $petRepository,
         CheckupRepository $checkupRepository,
-        ClientRepository $clientRepository,
         PaginatorInterface $paginator,
         Request $request
     ): Response {

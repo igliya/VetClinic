@@ -193,6 +193,15 @@ class Checkup
         return $this->status;
     }
 
+    public function calculateSum()
+    {
+        $sum = 0;
+        foreach ($this->services as $service) {
+            $sum += $service->price;
+        }
+        return $sum;
+    }
+
     public function setStatus(string $status): self
     {
         $this->status = $status;

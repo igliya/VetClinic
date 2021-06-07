@@ -46,7 +46,6 @@ class Payment
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="payments")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $registrar;
 

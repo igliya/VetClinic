@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210607163523 extends AbstractMigration
+final class Version20210607201002 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -36,7 +36,7 @@ final class Version20210607163523 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_14C55264ED5CA9E6 ON checkup_service (service_id)');
         $this->addSql('CREATE TABLE client (id INT NOT NULL, account_id INT NOT NULL, address VARCHAR(512) NOT NULL, passport VARCHAR(10) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_C74404559B6B5FBA ON client (account_id)');
-        $this->addSql('CREATE TABLE payment (id INT NOT NULL, client_id INT NOT NULL, checkup_id INT NOT NULL, registrar_id INT NOT NULL, date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, sum DOUBLE PRECISION NOT NULL, status VARCHAR(50) NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE payment (id INT NOT NULL, client_id INT NOT NULL, checkup_id INT NOT NULL, registrar_id INT DEFAULT NULL, date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, sum DOUBLE PRECISION NOT NULL, status VARCHAR(50) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_6D28840D19EB6921 ON payment (client_id)');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_6D28840DBD8A2086 ON payment (checkup_id)');
         $this->addSql('CREATE INDEX IDX_6D28840DD1AA2FC1 ON payment (registrar_id)');
