@@ -4,7 +4,7 @@
 
 {% block profile %}
     <li class="header__item">
-        <a href="{{ path('client_profile') }}" class="header__link">Добавить питомца</a>
+        <a href="{{ path('pet_new') }}" class="header__link">Добавить питомца</a>
     </li>
 {% endblock %}
 
@@ -24,6 +24,7 @@
                 <th scope="col">Вид</th>
                 <th scope="col">Пол</th>
                 <th scope="col">День рождения</th>
+                <th scope="col"></th>
             </tr>
             </thead>
             <tbody class="topic-table__content">
@@ -39,6 +40,7 @@
                         {% endif %}
                     </td>
                     <td>{{ pet.birthday|date('d.m.Y') }}</td>
+                    <td><a href="{{ path('pet_delete', { id: pet.id }) }}" onclick="return confirm('Вы действительно хотите удалить данного питомца?')" class="btn">Удалить</a></td>
                 </tr>
             {% endfor %}
             </tbody>

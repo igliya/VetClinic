@@ -24,6 +24,7 @@ class PetRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.owner = :owner')
+            ->andWhere('p.status = true')
             ->setParameter('owner', $owner)
             ->orderBy('p.name', 'ASC')
             ->getQuery();
