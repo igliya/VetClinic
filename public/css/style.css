@@ -594,7 +594,7 @@ form .button input {
     font-weight: 500;
     letter-spacing: 1px;
     transition: all 0.3s ease;
-    background: linear-gradient(135deg, #B88EDA, #727AEF);
+    background: #60A0FF;
     box-shadow: #5d5e69;
 }
 /* login styles end */
