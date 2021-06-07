@@ -150,6 +150,11 @@ class Client
         return $this;
     }
 
+    public function getPassportData(): string
+    {
+        return substr_replace($this->passport, ' ', 4, 0);
+    }
+
     public function __toString()
     {
         return $this->passport;
