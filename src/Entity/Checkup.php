@@ -20,17 +20,17 @@ class Checkup
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=512)
+     * @ORM\Column(type="string", length=512, nullable=true)
      */
     private $diagnosis;
 
     /**
-     * @ORM\Column(type="string", length=512)
+     * @ORM\Column(type="string", length=512, nullable=true)
      */
     private $treatment;
 
     /**
-     * @ORM\Column(type="string", length=512)
+     * @ORM\Column(type="string", length=512, nullable=true)
      */
     private $complaints;
 

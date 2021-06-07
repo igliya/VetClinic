@@ -2,6 +2,12 @@
 
 {% block title %}VetClinic | Личный кабинет {% endblock %}
 
+{% block profile %}
+    <li class="header__item">
+        <a href="{{ path('checkup_new') }}" class="header__link">Записаться на приём</a>
+    </li>
+{% endblock %}
+
 {% block main %}
     <div class="row main__row">
         <nav class="col-md-2 d-none d-md-block sidebar section-padding">

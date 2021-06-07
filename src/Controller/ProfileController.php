@@ -2,11 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Payment;
 use App\Repository\CheckupRepository;
-use App\Repository\PaymentRepository;
 use App\Repository\PetRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -89,49 +86,6 @@ class ProfileController extends AbstractController
         return $this->render('profile/checkups.html.twig', [
             'pagination' => $pagination,
         ]);
-    }
-
-    /**
-     * @Route("/checkups/pay/{id}", name="checkup_pay")
-     */
-    public function checkupPay(
-        CheckupRepository $checkupRepository,
-        EntityManagerInterface $manager,
-        int $id
-    ): Response {
-        $checkup = $checkupRepository->find($id);
-        if ($checkup) {
-            $checkup->setStatus('Оплачен');
-            $manager->persist($checkup);
-            $payment = new Payment();
-            $payment->setCheckup($checkup);
-            $payment->setClient($checkup->getPet()->getOwner());
-            $payment->setSum($checkup->calculateSum());
-            $payment->setDate(new \DateTime());
-            $payment->setStatus('Ожидает подтверждения');
-            $manager->persist($payment);
-            $manager->flush();
-        }
-
-        return $this->redirectToRoute('client_checkups');
-    }
-
-    /**
-     * @Route("/checkups/cancel/{id}", name="checkup_cancel")
-     */
-    public function checkupCancel(
-        CheckupRepository $checkupRepository,
-        EntityManagerInterface $manager,
-        int $id
-    ): Response {
-        $checkup = $checkupRepository->find($id);
-        if ($checkup) {
-            $checkup->setStatus('Отменён');
-            $manager->persist($checkup);
-            $manager->flush();
-        }
-
-        return $this->redirectToRoute('client_checkups');
     }
 
     /**

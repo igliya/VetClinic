@@ -1,0 +1,44 @@
+{% extends 'profile/index.html.twig' %}
+
+{% block title %}VetClinic | Запись на приём{% endblock %}
+
+{% block content %}
+    <!-- New checkup form start -->
+    <div class="container">
+        <div class="title">Запись на приём</div>
+        <div class="content">
+            {{ form_start(form) }}
+            {% set formErrors = form.vars.errors.form.getErrors(true) %}
+            {% if formErrors|length %}
+                <div class="user-details">
+                    <ul>
+                        {% for error in formErrors %}
+                            <li class="register-errors">
+                                ● {{ error.message }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            <div class="user-details">
+                <div class="input-box">
+                    <span class="details">Выберите питомца</span>
+                    {{ form_widget(form.pet) }}
+                </div>
+                <div class="input-box">
+                    <span class="details">Выберите доктора</span>
+                    {{ form_widget(form.doctor) }}
+                </div>
+                <div class="input-box">
+                    <span class="details">Выберите время</span>
+                    {{ form_widget(form.date) }}
+                </div>
+            </div>
+            <div class="button">
+                <input type="submit" value="Записаться">
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+    <!-- New checkup form end -->
+{% endblock %}
