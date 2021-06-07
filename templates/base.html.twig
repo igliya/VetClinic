@@ -32,9 +32,11 @@
                                     <a href="{{ path('app_register') }}" class="header__link">Регистрация</a>
                                 </li>
                             {% else %}
-                                <li class="header__item">
-                                    <a href="{{ path('app_home') }}" class="header__link">Личный кабинет</a>
-                                </li>
+                                {% block profile %}
+                                    <li class="header__item">
+                                        <a href="{{ path('client_profile') }}" class="header__link">Личный кабинет</a>
+                                    </li>
+                                {% endblock %}
                                 <li class="header__item">
                                     <div class="dropdown">
                                         <button class="dropdown-button">{{ app.user.username }}</button>

@@ -1,0 +1,50 @@
+{% extends 'profile/index.html.twig' %}
+
+{% block title %}VetClinic | История приёмов {% endblock %}
+
+{% block profile %}
+    <li class="header__item">
+        <a href="{{ path('client_profile') }}" class="header__link">Записаться на приём</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+    <div class="home">
+        <div class="wrapper">
+            <div class="home__info">
+                <h1 class="block-header text-center">
+                    История приёмов
+                </h1>
+            </div>
+        </div>
+        <table class="table table-hover text-center">
+            <thead class="topic-table__header">
+            <tr>
+                <th scope="col">Питомец</th>
+                <th scope="col">Доктор</th>
+                <th scope="col">Дата</th>
+                <th scope="col">Стоимость</th>
+                <th scope="col">Статус</th>
+            </tr>
+            </thead>
+            <tbody class="topic-table__content">
+            {% for checkup in pagination %}
+                <tr>
+                    <td>{{ checkup.pet.name }}</td>
+                    <td>{{ checkup.doctor.username }}</td>
+                    <td>{{ checkup.date|date('d.m.Y h:i')  }}</td>
+                    {% if checkup.payment is same as null%}
+                        <td></td>
+                    {% else %}
+                        <td>{{ checkup.payment.sum }} р.</td>
+                    {% endif %}
+                    <td>{{ checkup.status }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="navigation paginator__text">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}VetClinic | Личный кабинет {% endblock %}
+
+{% block main %}
+    <div class="row main__row">
+        <nav class="col-md-2 d-none d-md-block sidebar section-padding">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item text-left">
+                        <div class="active">
+                            <a class="nav-link section__link{% if app.request.get('_route') is same as 'client_profile' %}{{ ' current-menu-link' }}{% endif %}" href="{{ path('client_profile') }}">ЛИЧНЫЕ ДАННЫЕ</a>
+                        </div>
+                    </li>
+                    <li class="nav-item text-left">
+                        <div class="active">
+                            <a class="nav-link section__link{% if app.request.get('_route') is same as 'client_pets' %}{{ ' current-menu-link' }}{% endif %}" href="{{ path('client_pets') }}">ВАШИ ПИТОМЦЫ</a>
+                        </div>
+                    </li>
+                    <li class="nav-item text-left">
+                        <div class="active">
+                            <a class="nav-link section__link{% if app.request.get('_route') is same as 'client_checkups' %}{{ ' current-menu-link' }}{% endif %}" href="{{ path('client_checkups') }}">НАЗНАЧЕННЫЕ ПРИЁМЫ</a>
+                        </div>
+                    </li>
+                    <li class="nav-item text-left">
+                        <div class="active">
+                            <a class="nav-link section__link{% if app.request.get('_route') is same as 'client_checkups_history' %}{{ ' current-menu-link' }}{% endif %}" href="{{ path('client_checkups_history') }}">ИСТОРИЯ ПРИЁМОВ</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <main class="col-md-8 ml-sm-auto col-lg-9 px-4 shadow bg-white rounded" role="main">
+            {% block content %}
+            {% endblock %}
+        </main>
+    </div>
+<!-- Services end -->
+{% endblock %}

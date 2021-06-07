@@ -504,6 +504,7 @@ body {
     color: #fff;
     text-align: center;
     background: #60A0FF;
+    margin: auto;
 }
 
 .home-services-button {
@@ -526,6 +527,14 @@ body {
     display: inline-block;
     vertical-align: middle;
     line-height: normal;
+}
+
+.block-header {
+    font-family: Montserrat;
+    font-style: normal;
+    color: #3B3B3B;
+    font-weight: 500;
+    font-size: 20px;
 }
 /* home styles end */
 
@@ -617,13 +626,18 @@ form .button input {
 .section__link {
     font-family: Montserrat;
     font-style: normal;
-    font-weight: normal;
-    color: #172E68;
-    font-size: 18px;
+    color: #3B3B3B;
+    font-weight: 500;
+    font-size: 16px;
+    height: 40px;
 }
 
-.section__title {
-    font-size: 24px;
+.section-padding {
+    margin-left: 80px;
+}
+
+.current-menu-link {
+    color: #0A58CA;
 }
 /* section styles end */
 

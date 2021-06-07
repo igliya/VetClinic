@@ -57,6 +57,11 @@ class Checkup
     private $services;
 
     /**
+     * @ORM\OneToOne(targetEntity=Payment::class, mappedBy="checkup", cascade={"persist", "remove"})
+     */
+    private $payment;
+
+    /**
      * @ORM\Column(type="string", length=50)
      */
     private $status;
@@ -163,6 +168,22 @@ class Checkup
     public function removeService(Service $service): self
     {
         $this->services->removeElement($service);
+
+        return $this;
+    }
+
+    public function getPayment(): ?Payment
+    {
+        return $this->payment;
+    }
+
+    public function setPayment(Payment $payment): self
+    {
+        if ($payment->getCheckup() !== $this) {
+            $payment->setCheckup($this);
+        }
+
+        $this->payment = $payment;
 
         return $this;
     }
