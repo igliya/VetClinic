@@ -24,28 +24,30 @@
                     </div>
                     <nav class="header__nav">
                         <ul class="header__list">
-                            {% if not is_granted('ROLE_USER') %}
-                                <li class="header__item">
-                                    <a href="{{ path('app_login') }}" class="header__link">Вход</a>
-                                </li>
-                                <li class="header__item">
-                                    <a href="{{ path('app_register') }}" class="header__link">Регистрация</a>
-                                </li>
-                            {% else %}
-                                {% block profile %}
+                            {% block headernav %}
+                                {% if not is_granted('ROLE_USER') %}
                                     <li class="header__item">
-                                        <a href="{{ path('client_profile') }}" class="header__link">Личный кабинет</a>
+                                        <a href="{{ path('app_login') }}" class="header__link">Вход</a>
                                     </li>
-                                {% endblock %}
-                                <li class="header__item">
-                                    <div class="dropdown">
-                                        <button class="dropdown-button">{{ app.user.username }}</button>
-                                        <div class="dropdown-content">
-                                            <a href="{{ path('app_logout') }}">Выход</a>
+                                    <li class="header__item">
+                                        <a href="{{ path('app_register') }}" class="header__link">Регистрация</a>
+                                    </li>
+                                {% else %}
+                                    {% block profile %}
+                                        <li class="header__item">
+                                            <a href="{{ path('client_profile') }}" class="header__link">Личный кабинет</a>
+                                        </li>
+                                    {% endblock %}
+                                    <li class="header__item">
+                                        <div class="dropdown">
+                                            <button class="dropdown-button">{{ app.user.username }}</button>
+                                            <div class="dropdown-content">
+                                                <a href="{{ path('app_logout') }}">Выход</a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </li>
-                            {% endif %}
+                                    </li>
+                                {% endif %}
+                            {% endblock %}
                         </ul>
                     </nav>
                 </div>
