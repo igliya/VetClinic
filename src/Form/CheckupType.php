@@ -37,6 +37,7 @@ class CheckupType extends AbstractType
                     return $entityManager->createQueryBuilder('p')
                         ->andWhere('p.owner = :owner')
                         ->setParameter('owner', $this->security->getUser()->getClient())
+                        ->andWhere('p.status = true')
                         ->orderBy('p.name', 'ASC')
                         ;
                 },

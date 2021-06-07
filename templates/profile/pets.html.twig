@@ -40,7 +40,8 @@
                         {% endif %}
                     </td>
                     <td>{{ pet.birthday|date('d.m.Y') }}</td>
-                    <td><a href="{{ path('pet_delete', { id: pet.id }) }}" onclick="return confirm('Вы действительно хотите удалить данного питомца?')" class="btn">Удалить</a></td>
+                    <td><a href="{{ path('pet_delete', { id: pet.id }) }}"
+                           onclick="return confirm('Вы действительно хотите удалить данного питомца? Все назначенные приёмы будут отменены.')" class="btn">Удалить</a></td>
                 </tr>
             {% endfor %}
             </tbody>

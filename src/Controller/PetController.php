@@ -48,6 +48,12 @@ class PetController extends AbstractController
     {
         $pet = $petRepository->find($id);
         if ($pet) {
+            foreach ($pet->getCheckups() as $checkup) {
+                if ('Назначен' === $checkup->getStatus()) {
+                    $checkup->setStatus('Отменён');
+                    $manager->persist($checkup);
+                }
+            }
             $pet->setStatus(false);
             $manager->persist($pet);
             $manager->flush();

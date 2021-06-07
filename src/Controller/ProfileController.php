@@ -63,7 +63,7 @@ class ProfileController extends AbstractController
         Request $request
     ): Response {
         // получаем список питомцев пользователя
-        $pets = $petRepository->getPetsPaginationQuery($this->getUser()->getClient())->getResult();
+        $pets = $petRepository->getPetsByOwner($this->getUser()->getClient());
         $checkupsQuery = $checkupRepository->getCheckupsHistoryPaginationQuery($pets, [
             'Назначен', 'Ожидает оплаты', 'Оплачен',
         ]);
@@ -95,7 +95,7 @@ class ProfileController extends AbstractController
         Request $request
     ): Response {
         // получаем список питомцев пользователя
-        $pets = $petRepository->getPetsPaginationQuery($this->getUser()->getClient())->getResult();
+        $pets = $petRepository->getPetsByOwner($this->getUser()->getClient());
         $checkupsQuery = $checkupRepository->getCheckupsHistoryPaginationQuery($pets, ['Завершён', 'Отменён']);
         // получаем номер страницы
         $pageNumber = $request->query->getInt('page', 1);
