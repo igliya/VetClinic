@@ -297,6 +297,7 @@ html {
 body {
     height: 970px;
     background-image: url(../images/bg.png);
+    background-repeat: no-repeat;
     -moz-background-size: 100%; /* Firefox 3.6+ */
     -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
     -o-background-size: 100%; /* Opera 9.6+ */
@@ -320,7 +321,7 @@ body {
     align-content: center;
 }
 
-/* header style start */
+/* header styles start */
 .header {
     top: 0;
     left: 0;
@@ -354,7 +355,7 @@ body {
     font-weight: 500;
     font-size: 16px;
     text-transform: uppercase;
-    color: #6E81B6;
+    color: #3B3B3B;
     text-decoration: none;
     letter-spacing: 0.05em;
 }
@@ -369,7 +370,7 @@ body {
     font-weight: 500;
     font-size: 16px;
     text-transform: uppercase;
-    color: #6E81B6;
+    color: #3B3B3B;
     text-decoration: none;
     letter-spacing: 0.05em;
     background: none;
@@ -409,7 +410,7 @@ body {
 .no-hover {
     pointer-events: none;
 }
-/* header style end */
+/* header styles end */
 
 /* form errors styles start */
 .error {
@@ -443,26 +444,92 @@ body {
     font-family: Montserrat;
     font-style: normal;
     font-weight: normal;
-    font-size: 64px;
+}
+
+.home-title {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    color: #3B3B3B;
+}
+
+.home-text {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    color: #3B3B3B;
+    margin-top: 20px;
+}
+
+.home-button {
+    margin-top: 20px;
+    height: 60px;
+    width: 300px;
+    border-radius: 30px;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    background: #60A0FF;
+    box-shadow: #5d5e69;
+}
+
+.home-button span {
+    padding-top: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+}
+
+.home-footer {
+    margin-top: 400px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+}
+
+.home-services-list {
+    margin-top: 30px;
+}
+
+.home-service {
+    width: 200px;
+    height: 200px;
+    line-height: 200px;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    background: #60A0FF;
+}
+
+.home-services-button {
+    margin-top: 40px;
+    height: 60px;
+    width: 300px;
+    border-radius: 30px;
+    color: #60A0FF;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    background: white;
+    box-shadow: #5d5e69;
+    border: solid #60A0FF;
+}
+
+.home-services-button span {
+    padding-top: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
 }
 /* home styles end */
-
-/* about styles start */
-.about {
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 32px;
-}
-
-.about__content {
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: normal;
-    line-height: 1.5;
-    font-size: 20px;
-}
-/* about styles end */
 
 /* login styles start */
 .container {

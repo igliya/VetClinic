@@ -1,20 +1,58 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
-
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/OSPanel/domains/VetClinic/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/OSPanel/domains/VetClinic/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
-</div>
+{% block main %}
+    <!-- Home start -->
+    <div class="row main__row d-flex justify-content-center">
+        <main class="col-md-10 ml-sm-auto col-lg-10 px-4" role="main">
+            <div class="home">
+                <div class="wrapper">
+                    <h1 class="home-title text-left">
+                        НАДЕЖНЫЕ ПОМОЩНИКИ В УХОДЕ ЗА ВАШИМ ПИТОМЦЕМ
+                    </h1>
+                    <h1 class="home-text text-left">
+                        Мы стремимся предложить лучшее лечение для вашего животного.
+                    </h1>
+                    <a class="btn btn-primary home-button"><span>Записаться на приём</span></a>
+                </div>
+            </div>
+            <div class="home-footer">
+                <div class="wrapper">
+                    <h1 class="home-title text-center">
+                        Категории предоставляемых услуг
+                    </h1>
+                    <div class="row home-services-list">
+                        <div class="col-sm">
+                            <div class="home-service">
+                                ВАКЦИНАЦИЯ
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <div class="home-service">
+                                ДЕРМАТОЛОГИЯ
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <div class="home-service">
+                                ДИАГНОСТИКА
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <div class="home-service">
+                                КАРДИОЛОГИЯ
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <div class="home-service">
+                                ЧИПИРОВАНИЕ
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <a class="btn btn-primary home-services-button"><span>Стоимость услуг</span></a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <!-- Home end -->
 {% endblock %}
