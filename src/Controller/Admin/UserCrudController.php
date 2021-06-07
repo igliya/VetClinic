@@ -53,7 +53,7 @@ class UserCrudController extends AbstractCrudController
         FilterCollection $filters
     ): QueryBuilder {
         return $this->get(EntityRepository::class)->createQueryBuilder($searchDto, $entityDto, $fields, $filters)
-            ->add('where', 'CAST(entity.roles as text) != \'[]\'')
+            ->add('where', 'CAST(entity.roles as text) != \'["ROLE_CLIENT"]\'')
             ;
     }
 
@@ -89,6 +89,7 @@ class UserCrudController extends AbstractCrudController
                         case 'ROLE_ADMIN':
                             $rolesTranslation[] = 'Администратор';
                             break;
+                        case 'ROLE_CLIENT':
                         case 'ROLE_USER':
                             break;
                         default:

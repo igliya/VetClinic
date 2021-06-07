@@ -32,6 +32,7 @@ class AppFixtures extends Fixture
         $user1->setFirstName('Иван');
         $user1->setPatronymic('Иванович');
         $user1->setPhone('+7(904)123-4567');
+        $user1->setRoles(['ROLE_CLIENT']);
         $manager->persist($user1);
         $client = new Client();
         $client->setAddress('г. Липецк, ул. Московская, д.30');
