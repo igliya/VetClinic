@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}VetClinic | Список услуг {% endblock %}
+
+{% block content %}
+    <!-- Services start -->
+    <div class="row main__row d-flex justify-content-center">
+        <main class="col-md-10 ml-sm-auto col-lg-10 px-4 bg-white rounded shadow" role="main">
+            <div class="home">
+                <div class="wrapper">
+                    <div class="home__info">
+                        <h1 class="section__link section__title text-center">
+                            Список предоставляемых услуг
+                        </h1>
+                    </div>
+                </div>
+                <table class="table table-hover text-center">
+                    <thead class="topic-table__header">
+                    <tr>
+                        <th scope="col">Название услуги</th>
+                        <th scope="col">Цена услуги</th>
+                    </tr>
+                    </thead>
+                    <tbody class="topic-table__content">
+                    {% for service in pagination %}
+                        <tr>
+                            <td>{{ service.name }}</td>
+                            <td>{{ service.price }} р.</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <div class="navigation paginator__text">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
+            </div>
+        </main>
+    </div>
+    <!-- Services end -->
+{% endblock %}
