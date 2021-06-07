@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Repository\CheckupRepository;
 use App\Repository\ClientRepository;
 use App\Repository\PetRepository;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -92,7 +91,7 @@ class ProfileController extends AbstractController
     }
 
     /**
-     * @Route("/checkups/cancel/{id}", name="cancel_checkup")
+     * @Route("/checkups/cancel/{id}", name="checkup_cancel")
      */
     public function checkupsCancel(CheckupRepository $checkupRepository, EntityManagerInterface $manager, int $id): Response {
         $checkup = $checkupRepository->find($id);

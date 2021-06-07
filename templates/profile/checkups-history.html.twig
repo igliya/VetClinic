@@ -33,7 +33,7 @@
                     <td>{{ checkup.pet.name }}</td>
                     <td>{{ checkup.doctor.username }}</td>
                     <td>{{ checkup.date|date('d.m.Y h:i')  }}</td>
-                    {% if checkup.payment is same as null%}
+                    {% if checkup.payment is same as null %}
                         <td></td>
                     {% else %}
                         <td>{{ checkup.payment.sum }} р.</td>

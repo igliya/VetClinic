@@ -34,7 +34,7 @@
                     <td>{{ checkup.doctor.username }}</td>
                     <td>{{ checkup.date|date('d.m.Y h:i')  }}</td>
                     <td>{{ checkup.status }}</td>
-                    <td><a href="{{ path('cancel_checkup', { id: checkup.id }) }}" onclick="return confirm('Вы действительно хотите отменить данный приём?')" class="btn">Отменить</a></td>
+                    <td><a href="{{ path('checkup_cancel', { id: checkup.id }) }}" onclick="return confirm('Вы действительно хотите отменить данный приём?')" class="btn">Отменить</a></td>
                 </tr>
             {% endfor %}
             </tbody>
