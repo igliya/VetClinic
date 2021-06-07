@@ -32,6 +32,27 @@
         </nav>
         <main class="col-md-8 ml-sm-auto col-lg-9 px-4 shadow bg-white rounded" role="main">
             {% block content %}
+                <div class="home">
+                    <div class="wrapper">
+                        <div class="home__info">
+                            <h1 class="block-header text-center">
+                                Личные данные клиента
+                            </h1>
+                        </div>
+                        <div class="profile-info">
+                            ФИО: {{ app.user.lastName }} {{ app.user.firstName }} {{ app.user.patronymic }}
+                        </div>
+                        <div class="profile-info">
+                            Номер телефона: {{ app.user.phone }}
+                        </div>
+                        <div class="profile-info">
+                            Адрес: {{ app.user.client.address }}
+                        </div>
+                        <div class="profile-info">
+                            Паспортные данные: {{ app.user.client.passport }}
+                        </div>
+                    </div>
+                </div>
             {% endblock %}
         </main>
     </div>
