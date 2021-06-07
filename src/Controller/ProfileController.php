@@ -64,24 +64,21 @@ class ProfileController extends AbstractController
     ): Response {
         // получаем список питомцев пользователя
         $pets = $petRepository->getPetsPaginationQuery($this->getUser()->getClient())->getResult();
-        $pagination = null;
-        if ($pets) {
-            $checkupsQuery = $checkupRepository->getCheckupsHistoryPaginationQuery($pets, [
-                'Назначен', 'Ожидает оплаты', 'Оплачен',
-            ]);
-            // получаем номер страницы
-            $pageNumber = $request->query->getInt('page', 1);
-            // проверяем номер страницы
-            if ($pageNumber < 1) {
-                $pageNumber = 1;
-            }
-            // разбиваем на страницы
-            $pagination = $paginator->paginate(
-                $checkupsQuery,
-                $pageNumber,
-                10
-            );
+        $checkupsQuery = $checkupRepository->getCheckupsHistoryPaginationQuery($pets, [
+            'Назначен', 'Ожидает оплаты', 'Оплачен',
+        ]);
+        // получаем номер страницы
+        $pageNumber = $request->query->getInt('page', 1);
+        // проверяем номер страницы
+        if ($pageNumber < 1) {
+            $pageNumber = 1;
         }
+        // разбиваем на страницы
+        $pagination = $paginator->paginate(
+            $checkupsQuery,
+            $pageNumber,
+            10
+        );
 
         return $this->render('profile/checkups.html.twig', [
             'pagination' => $pagination,
@@ -99,22 +96,19 @@ class ProfileController extends AbstractController
     ): Response {
         // получаем список питомцев пользователя
         $pets = $petRepository->getPetsPaginationQuery($this->getUser()->getClient())->getResult();
-        $pagination = null;
-        if ($pets) {
-            $checkupsQuery = $checkupRepository->getCheckupsHistoryPaginationQuery($pets, ['Завершён', 'Отменён']);
-            // получаем номер страницы
-            $pageNumber = $request->query->getInt('page', 1);
-            // проверяем номер страницы
-            if ($pageNumber < 1) {
-                $pageNumber = 1;
-            }
-            // разбиваем на страницы
-            $pagination = $paginator->paginate(
-                $checkupsQuery,
-                $pageNumber,
-                10
-            );
+        $checkupsQuery = $checkupRepository->getCheckupsHistoryPaginationQuery($pets, ['Завершён', 'Отменён']);
+        // получаем номер страницы
+        $pageNumber = $request->query->getInt('page', 1);
+        // проверяем номер страницы
+        if ($pageNumber < 1) {
+            $pageNumber = 1;
         }
+        // разбиваем на страницы
+        $pagination = $paginator->paginate(
+            $checkupsQuery,
+            $pageNumber,
+            10
+        );
 
         return $this->render('profile/checkups-history.html.twig', [
             'pagination' => $pagination,
