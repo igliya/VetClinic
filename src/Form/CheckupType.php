@@ -71,11 +71,9 @@ class CheckupType extends AbstractType
                 'constraints' => [
                     new Callback(function ($object, ExecutionContextInterface $context) {
                         $now = new \DateTime((new \DateTime('now'))->format('Y-m-d'));
-                        $lastCheckupTime = new \DateTime((new \DateTime('now'))->format('Y-m-d') . ' 16:30');
                         $current = $object;
+                        $lastCheckupTime = new \DateTime($current->format('Y-m-d') . ' 16:30');
                         if ($current->format('U') - $now->format('U') < 0) {
-                            //$checkupDate = $this->checkupDateService->getNextDate($current);
-                            //dd($checkupDate);
                             if (0 === $current->format('U') - (new \DateTime('1970-01-01 11:11:11'))->format('U')) {
                                 $context
                                     ->buildViolation('На сегодня не осталось мест')
