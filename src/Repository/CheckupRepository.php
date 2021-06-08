@@ -28,6 +28,20 @@ class CheckupRepository extends ServiceEntityRepository
             ->setParameter('statuses', $statuses)
             ->setParameter('pets', $pets)
             ->orderBy('c.date', 'DESC')
-            ->getQuery();
+            ->getQuery()
+            ;
+    }
+
+    public function getAllCheckupsByDate($date)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.status = \'Назначен\'')
+            ->andWhere('c.date between :dateStart and :dateEnd')
+            ->setParameter('dateStart', $date->format('Y-m-d') . ' 00:00:00')
+            ->setParameter('dateEnd', $date->format('Y-m-d') . ' 23:59:59')
+            ->orderBy('c.date', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
     }
 }
