@@ -62,6 +62,13 @@ class UserCrudController extends AbstractCrudController
         $entityInstance->setPassword(
             $this->passwordEncoder->encodePassword($entityInstance, $entityInstance->getPassword())
         );
+        $roles = [];
+        foreach ($entityInstance->getRoles() as $role) {
+            if ('ROLE_USER' !== $role) {
+                $roles[] = $role;
+            }
+        }
+        $entityInstance->setRoles($roles);
         $entityManager->persist($entityInstance);
         $entityManager->flush();
     }
