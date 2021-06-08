@@ -38,3 +38,4 @@ security:
         - { path: ^/pet, roles: ROLE_CLIENT }
         - { path: ^/profile, roles: ROLE_CLIENT }
         - { path: ^/checkup, roles: ROLE_CLIENT }
+        - { path: ^/registrar, roles: ROLE_REGISTRAR }

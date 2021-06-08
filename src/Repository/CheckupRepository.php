@@ -20,6 +20,15 @@ class CheckupRepository extends ServiceEntityRepository
         parent::__construct($registry, Checkup::class);
     }
 
+    public function getPaymentPaginationQuery(): Query
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.status = \'Оплачен\'')
+            ->orderBy('c.date', 'DESC')
+            ->getQuery()
+            ;
+    }
+
     public function getCheckupsHistoryPaginationQuery($pets, $statuses): Query
     {
         return $this->createQueryBuilder('c')

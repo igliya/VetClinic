@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}VetClinic | Оплаченные приёмы {% endblock %}
+
+{% block profile %}
+{% endblock %}
+
+{% block content %}
+    <!-- Services start -->
+    <div class="row main__row d-flex justify-content-center">
+        <main class="col-md-10 ml-sm-auto col-lg-10 px-4 bg-white rounded shadow" role="main">
+            <div class="home">
+                <div class="wrapper">
+                    <div class="home__info">
+                        <h1 class="block-header text-center">
+                            Список оплаченных приёмов
+                        </h1>
+                    </div>
+                </div>
+                <table class="table table-hover text-center">
+                    <thead class="topic-table__header">
+                    <tr>
+                        <th scope="col">Клиент</th>
+                        <th scope="col">Питомец</th>
+                        <th scope="col">Доктор</th>
+                        <th scope="col">Дата приёма</th>
+                        <th scope="col">Статус</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody class="topic-table__content">
+                    {% for checkup in pagination %}
+                        <tr>
+                            <td>{{ checkup.pet.owner.account.fullName }}</td>
+                            <td>{{ checkup.pet.name }}</td>
+                            <td>{{ checkup.doctor.username }}</td>
+                            <td>{{ checkup.date|date('d.m.Y H:i')  }}</td>
+                            <td>{{ checkup.status }}</td>
+                            {% if checkup.status is same as 'Оплачен' %}
+                                <td><a href="{{ path('checkup_close', { id: checkup.id }) }}" onclick="return confirm('Вы действительно хотите подтвердить оплату данного приёма?')" class="btn">Подтвердить</a></td>
+                            {% else %}
+                                <td></td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <div class="navigation paginator__text">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
+            </div>
+        </main>
+    </div>
+    <!-- Services end -->
+{% endblock %}
