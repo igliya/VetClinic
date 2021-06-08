@@ -83,24 +83,4 @@ class CheckupController extends AbstractController
 
         return $this->redirectToRoute('client_checkups');
     }
-
-    /**
-     * @Route("/{id}/edit", name="checkup_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, Checkup $checkup): Response
-    {
-        $form = $this->createForm(CheckupType::class, $checkup);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('client_checkups');
-        }
-
-        return $this->render('checkup/edit.html.twig', [
-            'checkup' => $checkup,
-            'form' => $form->createView(),
-        ]);
-    }
 }

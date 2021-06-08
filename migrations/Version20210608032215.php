@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210607215309 extends AbstractMigration
+final class Version20210608032215 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -28,7 +28,7 @@ final class Version20210607215309 extends AbstractMigration
         $this->addSql('CREATE SEQUENCE service_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE "user_id_seq" INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE TABLE animal_kind (id INT NOT NULL, name VARCHAR(255) NOT NULL, status BOOLEAN NOT NULL, PRIMARY KEY(id))');
-        $this->addSql('CREATE TABLE checkup (id INT NOT NULL, doctor_id INT NOT NULL, pet_id INT NOT NULL, diagnosis VARCHAR(512) DEFAULT NULL, treatment VARCHAR(512) DEFAULT NULL, complaints VARCHAR(512) DEFAULT NULL, date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, status VARCHAR(50) NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE checkup (id INT NOT NULL, doctor_id INT NOT NULL, pet_id INT NOT NULL, diagnosis VARCHAR(5000) DEFAULT NULL, treatment VARCHAR(5000) DEFAULT NULL, complaints VARCHAR(5000) DEFAULT NULL, date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, status VARCHAR(50) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_FD1B7CAF87F4FB17 ON checkup (doctor_id)');
         $this->addSql('CREATE INDEX IDX_FD1B7CAF966F7FB6 ON checkup (pet_id)');
         $this->addSql('CREATE TABLE checkup_service (checkup_id INT NOT NULL, service_id INT NOT NULL, PRIMARY KEY(checkup_id, service_id))');

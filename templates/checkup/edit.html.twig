@@ -1,13 +1,61 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Checkup{% endblock %}
+{% block title %}VetClinic | Проведение приёма{% endblock %}
 
-{% block body %}
-    <h1>Edit Checkup</h1>
+{% block profile %}
+{% endblock %}
 
-    {{ include('checkup/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('checkup_index') }}">back to list</a>
-
-    {{ include('checkup/_delete_form.html.twig') }}
+{% block content %}
+    <!-- Checkup form start -->
+    <div class="row main__row d-flex justify-content-center">
+        <main class="col-md-10 ml-sm-auto col-lg-10 px-4 bg-white rounded shadow" role="main">
+            <div class="home">
+                <div class="wrapper">
+                    <div class="home__info">
+                        <h1 class="block-header text-center">
+                            Проведение приёма
+                        </h1>
+                    </div>
+                </div>
+                <div class="content">
+                    {{ form_start(form) }}
+                    {% set formErrors = form.vars.errors.form.getErrors(true) %}
+                    {% if formErrors|length %}
+                        <div class="user-details">
+                            <ul>
+                                {% for error in formErrors %}
+                                    <li class="register-errors">
+                                        ● {{ error.message }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                    <div class="new-topic-details">
+                        <div class="input-box">
+                            <span class="details">Жалобы</span>
+                            {{ form_widget(form.complaints) }}
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Диагноз</span>
+                            {{ form_widget(form.diagnosis) }}
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Лечение</span>
+                            {{ form_widget(form.treatment) }}
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Оказанные услуги</span>
+                            {{ form_widget(form.services) }}
+                        </div>
+                    </div>
+                    <div class="button">
+                        <input type="submit" value="Завершить приём">
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </main>
+    </div>
+    <!-- Checkup form end -->
 {% endblock %}

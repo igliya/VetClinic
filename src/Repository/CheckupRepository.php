@@ -20,6 +20,17 @@ class CheckupRepository extends ServiceEntityRepository
         parent::__construct($registry, Checkup::class);
     }
 
+    public function getCheckupsDoctorPaginationQuery($doctor): Query
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.doctor = :doctor')
+            ->setParameter('doctor', $doctor)
+            ->andWhere('c.status = \'Назначен\'')
+            ->orderBy('c.date', 'DESC')
+            ->getQuery()
+            ;
+    }
+
     public function getPaymentPaginationQuery(): Query
     {
         return $this->createQueryBuilder('c')
