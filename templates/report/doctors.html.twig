@@ -1,0 +1,39 @@
+{% extends 'report.html.twig' %}
+
+{% block title %}VetClinic | Список докторов {% endblock %}
+
+{% block content %}
+    <!-- Services start -->
+    <div class="row main__row d-flex justify-content-center">
+        <main class="col-md-10 ml-sm-auto col-lg-10 px-4 bg-white rounded shadow" role="main">
+            <div class="home">
+                <div class="wrapper">
+                    <div class="home__info">
+                        <h1 class="block-header text-center">
+                            Список докторов
+                        </h1>
+                    </div>
+                </div>
+                <table class="table table-hover text-center">
+                    <thead class="topic-table__header">
+                    <tr>
+                        <th scope="col">ФИО доктора</th>
+                        <th scope="col">Количество приёмов</th>
+                        <th scope="col">Сумма</th>
+                    </tr>
+                    </thead>
+                    <tbody class="topic-table__content">
+                    {% for doctor in doctors %}
+                        <tr>
+                            <td>{{ doctor.fullName }}</td>
+                            <td>{{ doctor.checkups.count }}</td>
+                            <td>{{ doctor.getCheckupsSum() }} р.</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    <!-- Services end -->
+{% endblock %}

@@ -197,7 +197,7 @@ class Checkup
     {
         $sum = 0;
         foreach ($this->services as $service) {
-            $sum += $service->price;
+            $sum += $service->getPrice();
         }
         return $sum;
     }

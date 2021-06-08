@@ -34,5 +34,15 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section();
         yield MenuItem::linkToCrud('Типы животных', 'fas fa-cat', AnimalKind::class);
         yield MenuItem::linkToCrud('Сотрудники', 'fas fa-user-circle', User::class);
+        yield MenuItem::linkToUrl(
+            'Отчёт по услугам',
+            'fas fa-file-pdf',
+            $this->generateUrl('report_services', [], true)
+        );
+        yield MenuItem::linkToUrl(
+            'Отчёт по докторам',
+            'fas fa-file-pdf',
+            $this->generateUrl('report_doctors', [], true)
+        );
     }
 }

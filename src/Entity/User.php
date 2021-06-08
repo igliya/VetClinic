@@ -254,6 +254,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getCheckupsSum()
+    {
+        $sum = 0;
+        foreach ($this->checkups as $checkup) {
+            $sum += $checkup->calculateSum();
+        }
+        return $sum;
+    }
+
     public function removeCheckup(Checkup $checkup): self
     {
         if ($this->checkups->removeElement($checkup)) {
