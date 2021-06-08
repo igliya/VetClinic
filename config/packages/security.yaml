@@ -39,3 +39,4 @@ security:
         - { path: ^/profile, roles: ROLE_CLIENT }
         - { path: ^/checkup, roles: ROLE_CLIENT }
         - { path: ^/registrar, roles: ROLE_REGISTRAR }
+        - { path: ^/doctor, roles: ROLE_DOCTOR }

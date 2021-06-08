@@ -19,6 +19,9 @@ class HomeController extends AbstractController
         if ($this->isGranted('ROLE_REGISTRAR')) {
             return $this->redirectToRoute('app_registrar');
         }
+        if ($this->isGranted('ROLE_DOCTOR')) {
+            return $this->redirectToRoute('app_doctor');
+        }
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
         ]);
