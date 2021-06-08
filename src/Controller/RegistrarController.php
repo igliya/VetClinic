@@ -20,7 +20,7 @@ class RegistrarController extends AbstractController
         PaginatorInterface $paginator,
         Request $request
     ): Response {
-        // формируем запрос на получение списка оплаченных заказов
+        // формируем запрос на получение списка оплаченных приёмов
         $servicesQuery = $checkupRepository->getPaymentPaginationQuery();
         // получаем номер страницы
         $pageNumber = $request->query->getInt('page', 1);
@@ -35,7 +35,7 @@ class RegistrarController extends AbstractController
             10
         );
 
-        return $this->render('checkup/index.html.twig', [
+        return $this->render('checkup/registrar.html.twig', [
             'pagination' => $pagination,
         ]);
     }
