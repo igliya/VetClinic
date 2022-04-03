@@ -57,7 +57,7 @@ class DoctorController extends AbstractController
             $amqpMessage = [
                 'action' => 'end',
                 'id' => $checkup->getId(),
-                'date' => $checkup->getDate(),
+                'date' => $checkup->getDate()->format('c'),
             ];
             $publisherAMQP->publishMessage(json_encode($amqpMessage));
 
