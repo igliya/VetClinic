@@ -162,11 +162,14 @@ class APIController extends AbstractController
                     'pet_name' => $checkup->getPet()->getName(),
                     'pet_kind' => $checkup->getPet()->getKind()->getName(),
                     'pet_sex' => $checkup->getPet()->getSex() ? 'Мужской' : 'Женский',
-                    'checkup_diagnosis' => $checkup->getDiagnosis(),
-                    'checkup_treatment' => $checkup->getTreatment(),
-                    'checkup_complaints' => $checkup->getComplaints(),
-                    'checkup_services' => $checkupServicesDto,
-                    'checkup_sum' => $checkup->calculateSum()
+                    'checkup_date' => $checkup->getDate(),
+                    'checkup' => [
+                        'diagnosis' => $checkup->getDiagnosis(),
+                        'treatment' => $checkup->getTreatment(),
+                        'complaints' => $checkup->getComplaints(),
+                        'services' => $checkupServicesDto,
+                        'sum' => $checkup->calculateSum()
+                    ]
                 ];
             }
 
