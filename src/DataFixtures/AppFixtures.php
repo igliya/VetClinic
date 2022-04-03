@@ -26,8 +26,8 @@ class AppFixtures extends Fixture
     {
         // создаём клиента
         $user1 = new User();
-        $user1->setLogin('client1');
-        $user1->setPassword($this->passwordEncoder->encodePassword($user1, 'Client1!123'));
+        $user1->setLogin('client');
+        $user1->setPassword($this->passwordEncoder->encodePassword($user1, 'Client123!'));
         $user1->setLastName('Иванов');
         $user1->setFirstName('Иван');
         $user1->setPatronymic('Иванович');
@@ -42,8 +42,8 @@ class AppFixtures extends Fixture
 
         // создаём врача
         $user2 = new User();
-        $user2->setLogin('doctor1');
-        $user2->setPassword($this->passwordEncoder->encodePassword($user2, 'Doctor1!123'));
+        $user2->setLogin('doctor');
+        $user2->setPassword($this->passwordEncoder->encodePassword($user2, 'Doctor123!'));
         $user2->setLastName('Петров');
         $user2->setFirstName('Пётр');
         $user2->setPatronymic('Петрович');
@@ -53,8 +53,8 @@ class AppFixtures extends Fixture
 
         // создаём регистратора
         $user3 = new User();
-        $user3->setLogin('registrar1');
-        $user3->setPassword($this->passwordEncoder->encodePassword($user3, 'Registrar1!123'));
+        $user3->setLogin('registrar');
+        $user3->setPassword($this->passwordEncoder->encodePassword($user3, 'Registrar123!'));
         $user3->setLastName('Фёдоров');
         $user3->setFirstName('Фёдор');
         $user3->setPatronymic('Фёдорович');
@@ -65,7 +65,7 @@ class AppFixtures extends Fixture
         // создаём администратора
         $admin = new User();
         $admin->setLogin('admin');
-        $admin->setPassword($this->passwordEncoder->encodePassword($admin, 'Admin!123'));
+        $admin->setPassword($this->passwordEncoder->encodePassword($admin, 'Admin123!'));
         $admin->setLastName('Администратор');
         $admin->setFirstName('');
         $admin->setPatronymic('');
