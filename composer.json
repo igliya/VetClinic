@@ -14,7 +14,9 @@
         "easycorp/easyadmin-bundle": "^3.3",
         "knplabs/knp-paginator-bundle": "^5.5",
         "knplabs/knp-snappy-bundle": "^1.8",
+        "lcobucci/jwt": "^3.4",
         "oro/doctrine-extensions": "^2.0",
+        "php-amqplib/php-amqplib": "^3.2",
         "phpdocumentor/reflection-docblock": "^5.2",
         "sensio/framework-extra-bundle": "^6.1",
         "symfony/asset": "5.3.*",
@@ -63,7 +65,11 @@
         "preferred-install": {
             "*": "dist"
         },
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "symfony/flex": true,
+            "symfony/runtime": true
+        }
     },
     "autoload": {
         "psr-4": {
