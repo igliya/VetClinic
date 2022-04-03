@@ -48,4 +48,15 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->getResult()
             ;
     }
+
+    public function findDoctorByLogin($login): ?User
+    {
+        return $this->createQueryBuilder('d')
+            ->andWhere('CAST(d.roles as text) = \'["ROLE_DOCTOR"]\'')
+            ->andWhere('d.login = :val')
+            ->setParameter('val', $login)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
 }
