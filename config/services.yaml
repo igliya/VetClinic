@@ -4,6 +4,16 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    app.amqp_host: '%env(APP_AMQP_HOST)%'
+    app.amqp_port: '%env(APP_AMQP_PORT)%'
+    app.amqp_user: '%env(APP_AMQP_USER)%'
+    app.amqp_password: '%env(APP_AMQP_PASSWORD)%'
+    app.amqp_exchange: '%env(APP_AMQP_EXCHANGE)%'
+    app.amqp_queue: '%env(APP_AMQP_QUEUE)%'
+    jwt.secret: '%env(JWT_SECRET)%'
+    jwt.issued_by: '%env(JWT_ISSUED_BY)%'
+    jwt.permitted_for: '%env(JWT_PERMITTED_FOR)%'
+    jwt.expires_at: '%env(JWT_EXPIRES_AT)%'
 
 services:
     # default configuration for services in *this* file
