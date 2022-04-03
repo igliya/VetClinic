@@ -25,7 +25,7 @@ class CheckupRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('c')
             ->andWhere('c.doctor = :doctor')
             ->setParameter('doctor', $doctor)
-            ->andWhere('c.status = \'Назначен\'')
+            ->andWhere('c.status = \'Назначен\' or c.status = \'Ожидает оплаты\'')
             ->orderBy('c.date', 'DESC')
             ->getQuery()
             ->getResult()
