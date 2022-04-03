@@ -87,11 +87,14 @@ class APIController extends AbstractController
             foreach ($checkups as $checkup) {
                 $checkupsDto[] = [
                     'id' => $checkup->getId(),
-                    'client' => $checkup->getPet()->getOwner()->getAccount()->getFullName(),
-                    'pet' => $checkup->getPet()->getName(),
-                    'date' => $checkup->getDate(),
+                    'client_name' => $checkup->getPet()->getOwner()->getAccount()->getFullName(),
+                    'pet_name' => $checkup->getPet()->getName(),
+                    'pet_kind' => $checkup->getPet()->getKind()->getName(),
+                    'pet_sex' => $checkup->getPet()->getSex() ? 'Мужской' : 'Женский',
+                    'checkup_date' => $checkup->getDate(),
                 ];
             }
+
             return $this->json($checkupsDto);
         } catch (BadRequestException $badRequestException) {
             return $this->json([
@@ -144,13 +147,29 @@ class APIController extends AbstractController
             $checkups = $checkupRepository->getDoctorCheckupsHistory($doctor);
             $checkupsDto = [];
             foreach ($checkups as $checkup) {
+                // get checkup services
+                $checkupServices = $checkup->getServices();
+                $checkupServicesDto = [];
+                foreach ($checkupServices as $service) {
+                    $checkupServicesDto[] = [
+                        'name' => $service->getName(),
+                        'price' => $service->getPrice()
+                    ];
+                }
                 $checkupsDto[] = [
                     'id' => $checkup->getId(),
-                    'client' => $checkup->getPet()->getOwner()->getAccount()->getFullName(),
-                    'pet' => $checkup->getPet()->getName(),
-                    'date' => $checkup->getDate(),
+                    'client_name' => $checkup->getPet()->getOwner()->getAccount()->getFullName(),
+                    'pet_name' => $checkup->getPet()->getName(),
+                    'pet_kind' => $checkup->getPet()->getKind()->getName(),
+                    'pet_sex' => $checkup->getPet()->getSex() ? 'Мужской' : 'Женский',
+                    'checkup_diagnosis' => $checkup->getDiagnosis(),
+                    'checkup_treatment' => $checkup->getTreatment(),
+                    'checkup_complaints' => $checkup->getComplaints(),
+                    'checkup_services' => $checkupServicesDto,
+                    'checkup_sum' => $checkup->calculateSum()
                 ];
             }
+
             return $this->json($checkupsDto);
         } catch (BadRequestException $badRequestException) {
             return $this->json([
