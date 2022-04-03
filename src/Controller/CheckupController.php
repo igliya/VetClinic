@@ -99,6 +99,7 @@ class CheckupController extends AbstractController
             $amqpMessage = [
                 'action' => 'cancel',
                 'id' => $checkup->getId(),
+                'date' => $checkup->getDate(),
             ];
             $publisherAMQP->publishMessage(json_encode($amqpMessage));
         }

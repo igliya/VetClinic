@@ -54,33 +54,10 @@ class DoctorController extends AbstractController
             $checkup->setStatus('Ожидает оплаты');
             $this->getDoctrine()->getManager()->flush();
 
-            // get checkup services
-            $checkupServices = $checkup->getServices();
-            $checkupServicesDto = [];
-            foreach ($checkupServices as $service) {
-                $checkupServicesDto[] = [
-                    'name' => $service->getName(),
-                    'price' => $service->getPrice(),
-                ];
-            }
-            $checkupDto = [
-                'id' => $checkup->getId(),
-                'client_name' => $checkup->getPet()->getOwner()->getAccount()->getFullName(),
-                'pet_name' => $checkup->getPet()->getName(),
-                'pet_kind' => $checkup->getPet()->getKind()->getName(),
-                'pet_sex' => $checkup->getPet()->getSex() ? 'Мужской' : 'Женский',
-                'checkup_date' => $checkup->getDate(),
-                'checkup' => [
-                    'diagnosis' => $checkup->getDiagnosis(),
-                    'treatment' => $checkup->getTreatment(),
-                    'complaints' => $checkup->getComplaints(),
-                    'services' => $checkupServicesDto,
-                    'sum' => $checkup->calculateSum(),
-                ],
-            ];
             $amqpMessage = [
                 'action' => 'end',
-                'payload' => $checkupDto,
+                'id' => $checkup->getId(),
+                'date' => $checkup->getDate(),
             ];
             $publisherAMQP->publishMessage(json_encode($amqpMessage));
 
