@@ -3,9 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Checkup;
-use App\Entity\Payment;
 use App\Form\CheckupEditType;
 use App\Repository\CheckupRepository;
+use App\Service\PublisherAMQP;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -45,7 +45,7 @@ class DoctorController extends AbstractController
     /**
      * @Route("/doctor/checkup/{id}/edit", name="checkup_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Checkup $checkup): Response
+    public function edit(Request $request, Checkup $checkup, PublisherAMQP $publisherAMQP): Response
     {
         $form = $this->createForm(CheckupEditType::class, $checkup);
         $form->handleRequest($request);
@@ -53,6 +53,36 @@ class DoctorController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $checkup->setStatus('Ожидает оплаты');
             $this->getDoctrine()->getManager()->flush();
+
+            // get checkup services
+            $checkupServices = $checkup->getServices();
+            $checkupServicesDto = [];
+            foreach ($checkupServices as $service) {
+                $checkupServicesDto[] = [
+                    'name' => $service->getName(),
+                    'price' => $service->getPrice(),
+                ];
+            }
+            $checkupDto = [
+                'id' => $checkup->getId(),
+                'client_name' => $checkup->getPet()->getOwner()->getAccount()->getFullName(),
+                'pet_name' => $checkup->getPet()->getName(),
+                'pet_kind' => $checkup->getPet()->getKind()->getName(),
+                'pet_sex' => $checkup->getPet()->getSex() ? 'Мужской' : 'Женский',
+                'checkup_date' => $checkup->getDate(),
+                'checkup' => [
+                    'diagnosis' => $checkup->getDiagnosis(),
+                    'treatment' => $checkup->getTreatment(),
+                    'complaints' => $checkup->getComplaints(),
+                    'services' => $checkupServicesDto,
+                    'sum' => $checkup->calculateSum(),
+                ],
+            ];
+            $amqpMessage = [
+                'action' => 'end',
+                'payload' => $checkupDto,
+            ];
+            $publisherAMQP->publishMessage(json_encode($amqpMessage));
 
             return $this->redirectToRoute('app_doctor');
         }
