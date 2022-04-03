@@ -78,7 +78,7 @@ class APIController extends AbstractController
             // get doctor id
             $doctorId = (int) $token->claims()->get('user_id');
             // get doctor
-            $doctor = $userRepository->find($doctorId);
+            $doctor = $userRepository->findDoctorById($doctorId);
             if (null === $doctor) {
                 throw new NotFoundHttpException('Doctor not found');
             }
@@ -137,7 +137,7 @@ class APIController extends AbstractController
             // get doctor id
             $doctorId = (int) $token->claims()->get('user_id');
             // get doctor
-            $doctor = $userRepository->find($doctorId);
+            $doctor = $userRepository->findDoctorById($doctorId);
             if (null === $doctor) {
                 throw new NotFoundHttpException('Doctor not found');
             }

@@ -59,4 +59,15 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->getOneOrNullResult()
             ;
     }
+
+    public function findDoctorById($id): ?User
+    {
+        return $this->createQueryBuilder('d')
+            ->andWhere('CAST(d.roles as text) = \'["ROLE_DOCTOR"]\'')
+            ->andWhere('d.id = :val')
+            ->setParameter('val', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
 }
