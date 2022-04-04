@@ -59,7 +59,7 @@ class DoctorController extends AbstractController
                 'id' => $checkup->getId(),
                 'date' => $checkup->getDate()->format('c'),
             ];
-            $publisherAMQP->publishMessage(json_encode($amqpMessage));
+            // $publisherAMQP->publishMessage(json_encode($amqpMessage));
 
             return $this->redirectToRoute('app_doctor');
         }

@@ -45,7 +45,7 @@ class CheckupController extends AbstractController
                 'action' => 'add',
                 'payload' => $checkupDto,
             ];
-            $publisherAMQP->publishMessage(json_encode($amqpMessage));
+            // $publisherAMQP->publishMessage(json_encode($amqpMessage));
 
             return $this->redirectToRoute('client_checkups');
         }
@@ -101,7 +101,7 @@ class CheckupController extends AbstractController
                 'id' => $checkup->getId(),
                 'date' => $checkup->getDate()->format('c'),
             ];
-            $publisherAMQP->publishMessage(json_encode($amqpMessage));
+            // $publisherAMQP->publishMessage(json_encode($amqpMessage));
         }
 
         return $this->redirectToRoute('client_checkups');
