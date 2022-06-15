@@ -22,7 +22,7 @@
             {% endif %}
             <div class="user-details">
                 <div class="input-box">
-                    <span class="details">Логин</span>
+                    <span class="details">Email</span>
                     {{ form_widget(registrationForm.login) }}
                 </div>
                 <div class="input-box">
@@ -53,10 +53,10 @@
                     <span class="details">Адрес</span>
                     {{ form_widget(registrationForm.address) }}
                 </div>
-                <div class="input-box">
-                    <span class="details">Серия и номер паспорта</span>
-                    {{ form_widget(registrationForm.passport) }}
-                </div>
+{#                <div class="input-box">#}
+{#                    <span class="details">Серия и номер паспорта</span>#}
+{#                    {{ form_widget(registrationForm.passport) }}#}
+{#                </div>#}
                 <div class="checkbox">
                     {{ form_widget(registrationForm.agreeTerms) }}
                     {{ form_label(registrationForm.agreeTerms, null, {'label_attr':{'class':'checkbox-label'}}) }}

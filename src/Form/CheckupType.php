@@ -35,7 +35,7 @@ class CheckupType extends AbstractType
             ->add('pet', EntityType::class, [
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Вы должны выбрать питомца! Если его нет в списке, то Вы всегда можете добавить его в личном кабинете',
+                        'message' => 'Вы должны выбрать Животное! Если его нет в списке, то Вы всегда можете добавить его в личном кабинете',
                     ]),
                 ],
                 'class' => Pet::class,

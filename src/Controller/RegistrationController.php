@@ -43,7 +43,7 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             // создаём клиента к аккаунту
             $client = new Client();
-            $client->setPassport($form->get('passport')->getData());
+//            $client->setPassport($form->get('passport')->getData());
             $client->setAddress($form->get('address')->getData());
             $client->setAccount($user);
             $entityManager->persist($client);

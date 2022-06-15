@@ -20,7 +20,7 @@
                     </li>
                     <li class="nav-item text-left">
                         <div class="active">
-                            <a class="nav-link section__link{% if app.request.get('_route') is same as 'client_pets' %}{{ ' current-menu-link' }}{% endif %}" href="{{ path('client_pets') }}">ВАШИ ПИТОМЦЫ</a>
+                            <a class="nav-link section__link{% if app.request.get('_route') is same as 'client_pets' %}{{ ' current-menu-link' }}{% endif %}" href="{{ path('client_pets') }}">ВАШИ ЖИВОТНЫЕ</a>
                         </div>
                     </li>
                     <li class="nav-item text-left">
@@ -54,9 +54,9 @@
                         <div class="profile-info">
                             Адрес: {{ app.user.client.address }}
                         </div>
-                        <div class="profile-info">
-                            Паспортные данные: {{ app.user.client.getPassportData() }}
-                        </div>
+{#                        <div class="profile-info">#}
+{#                            Паспортные данные: {{ app.user.client.getPassportData() }}#}
+{#                        </div>#}
                     </div>
                 </div>
             {% endblock %}

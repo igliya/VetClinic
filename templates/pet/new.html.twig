@@ -1,11 +1,11 @@
 {% extends 'profile/index.html.twig' %}
 
-{% block title %}VetClinic | Добавление питомца{% endblock %}
+{% block title %}VetClinic | Добавление животного{% endblock %}
 
 {% block content %}
     <!-- New pet form start -->
     <div class="container">
-        <div class="title">Добавление питомца</div>
+        <div class="title">Добавление животного</div>
         <div class="content">
             {{ form_start(form) }}
             {% set formErrors = form.vars.errors.form.getErrors(true) %}
@@ -22,19 +22,19 @@
             {% endif %}
             <div class="user-details">
                 <div class="input-box">
-                    <span class="details">Имя питомца</span>
+                    <span class="details">Кличка животного</span>
                     {{ form_widget(form.name) }}
                 </div>
                 <div class="input-box">
-                    <span class="details">День рождения питомца</span>
+                    <span class="details">Дата рождения животного</span>
                     {{ form_widget(form.birthday) }}
                 </div>
                 <div class="input-box">
-                    <span class="details">Пол питомца</span>
+                    <span class="details">Пол животного</span>
                     {{ form_widget(form.sex) }}
                 </div>
                 <div class="input-box">
-                    <span class="details">Вид питомца</span>
+                    <span class="details">Вид животного</span>
                     {{ form_widget(form.kind) }}
                 </div>
             </div>

@@ -26,15 +26,11 @@ class RegistrationFormType extends AbstractType
                         'min' => 3,
                         'minMessage' => 'Логин должен быть не менее {{ limit }} символов',
                         'max' => 255,
-                    ]),
-                    new Regex([
-                        'pattern' => '/^[A-z\d_]{0,255}$/',
-                        'message' => 'Логин должен состоять только из латинских букв, цифр и символа нижнего подчёркивания',
-                    ]),
+                    ])
                 ],
                 'attr' => [
                     'maxlength' => 255,
-                    'placeholder' => 'Введите логин',
+                    'placeholder' => 'Введите email',
                 ],
             ])
             ->add('firstName', TextType::class, [
@@ -129,19 +125,19 @@ class RegistrationFormType extends AbstractType
                 ],
                 'mapped' => false,
             ])
-            ->add('passport', TextType::class, [
-                'constraints' => [
-                    new Regex([
-                        'pattern' => '/^[0-9]{10}$/',
-                        'message' => 'Серия и номер паспорта должны вводиться цифрами без пробелов',
-                    ]),
-                ],
-                'attr' => [
-                    'maxlength' => 512,
-                    'placeholder' => 'Введите данные паспорта',
-                ],
-                'mapped' => false,
-            ])
+//            ->add('passport', TextType::class, [
+//                'constraints' => [
+//                    new Regex([
+//                        'pattern' => '/^[0-9]{10}$/',
+//                        'message' => 'Серия и номер паспорта должны вводиться цифрами без пробелов',
+//                    ]),
+//                ],
+//                'attr' => [
+//                    'maxlength' => 512,
+//                    'placeholder' => 'Введите данные паспорта',
+//                ],
+//                'mapped' => false,
+//            ])
             ->add('agreeTerms', CheckboxType::class, [
                 'required' => true,
                 'mapped' => false,

@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\AnimalKind;
+use App\Entity\Service;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -32,6 +33,7 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::section();
+        yield MenuItem::linkToCrud('Услуги', 'fas fa-list', Service::class);
         yield MenuItem::linkToCrud('Типы животных', 'fas fa-cat', AnimalKind::class);
         yield MenuItem::linkToCrud('Сотрудники', 'fas fa-user-circle', User::class);
         yield MenuItem::linkToUrl(
@@ -43,6 +45,11 @@ class DashboardController extends AbstractDashboardController
             'Отчёт по докторам',
             'fas fa-file-pdf',
             $this->generateUrl('report_doctors', [], true)
+        );
+        yield MenuItem::linkToUrl(
+            'Статистика',
+            'fa fa-bar-chart',
+            "http://practice.igliya.ru"
         );
     }
 }

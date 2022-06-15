@@ -80,7 +80,6 @@ class UserCrudController extends AbstractCrudController
         yield TextField::new('firstName')->setLabel('Имя');
         yield TextField::new('lastName')->setLabel('Фамилия');
         yield TextField::new('patronymic')->setLabel('Отчество');
-        yield TextField::new('phone')->setLabel('Телефон');
         yield ArrayField::new('roles')->setLabel('Роли')->formatValue(
             function ($rolesText, $user) {
                 $roles = $user->getRoles();

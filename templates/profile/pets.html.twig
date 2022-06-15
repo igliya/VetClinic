@@ -1,10 +1,10 @@
 {% extends 'profile/index.html.twig' %}
 
-{% block title %}VetClinic | Питомцы {% endblock %}
+{% block title %}VetClinic | Животные {% endblock %}
 
 {% block profile %}
     <li class="header__item">
-        <a href="{{ path('pet_new') }}" class="header__link">Добавить питомца</a>
+        <a href="{{ path('pet_new') }}" class="header__link">Добавить животное</a>
     </li>
 {% endblock %}
 
@@ -13,7 +13,7 @@
         <div class="wrapper">
             <div class="home__info">
                 <h1 class="block-header text-center">
-                    Список питомцев
+                    Список животных
                 </h1>
             </div>
         </div>
@@ -41,7 +41,7 @@
                     </td>
                     <td>{{ pet.birthday|date('d.m.Y') }}</td>
                     <td><a href="{{ path('pet_delete', { id: pet.id }) }}"
-                           onclick="return confirm('Вы действительно хотите удалить данного питомца? Все назначенные приёмы будут отменены.')" class="btn">Удалить</a></td>
+                           onclick="return confirm('Вы действительно хотите удалить данное животное? Все назначенные приёмы будут отменены.')" class="btn">Удалить</a></td>
                 </tr>
             {% endfor %}
             </tbody>

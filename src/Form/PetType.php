@@ -33,13 +33,13 @@ class PetType extends AbstractType
                 'constraints' => [
                     new Length([
                         'min' => 2,
-                        'minMessage' => 'Имя должно быть не менее {{ limit }} символов',
+                        'minMessage' => 'Кличка должна быть не менее {{ limit }} символов',
                         'max' => 50,
                     ]),
                 ],
                 'attr' => [
                     'maxlength' => 50,
-                    'placeholder' => 'Введите имя',
+                    'placeholder' => 'Введите кличку',
                 ],
             ])
             ->add('birthday', DateType::class, [
@@ -49,7 +49,7 @@ class PetType extends AbstractType
                         $current = $object;
                         if ($now->format('U') - $current->format('U') < 0) {
                             $context
-                                ->buildViolation('День рождения не может быть позже текущей даты')
+                                ->buildViolation('Дата рождения не может быть позже текущей даты')
                                 ->addViolation();
                         }
                     }),
@@ -65,7 +65,7 @@ class PetType extends AbstractType
                 ],
             ])
             ->add('sex', ChoiceType::class, [
-                'choices' => ['Мужской' => true, 'Женский' => false],
+                'choices' => ['М' => true, 'Ж' => false],
                 'attr' => [
                     'class' => 'form-select',
                 ],
