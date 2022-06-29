@@ -30,13 +30,13 @@
                     </li>
                     <li class="nav-item text-left">
                         <div class="active">
-                            <a class="nav-link section__link{% if app.request.get('_route') is same as 'client_checkups_history' %}{{ ' current-menu-link' }}{% endif %}" href="{{ path('client_checkups_history') }}">ИСТОРИЯ ПРИЁМОВ</a>
+                            <a class="nav-link section__link{% if app.request.get('_route') is same as 'client_checkups_history' %}{{ ' current-menu-link' }}{% endif %}" href="{{ path('client_checkups_history') }}">ИСТОРИЯ ПЛАТЕЖЕЙ</a>
                         </div>
                     </li>
                 </ul>
             </div>
         </nav>
-        <main class="col-md-8 ml-sm-auto col-lg-9 px-4 shadow bg-white rounded" role="main">
+        <main class="col-md-8 ml-sm-auto col-lg-9 px-4 bg-white rounded" role="main">
             {% block content %}
                 <div class="home">
                     <div class="wrapper">
@@ -57,6 +57,9 @@
 {#                        <div class="profile-info">#}
 {#                            Паспортные данные: {{ app.user.client.getPassportData() }}#}
 {#                        </div>#}
+                    </div>
+                    <div class="button" style="margin-left: 30px; margin-bottom: 50px">
+                        <input type="submit" value="Изменить">
                     </div>
                 </div>
             {% endblock %}

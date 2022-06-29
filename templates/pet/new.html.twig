@@ -37,6 +37,15 @@
                     <span class="details">Вид животного</span>
                     {{ form_widget(form.kind) }}
                 </div>
+                <div class="input-box">
+                    <span class="details">Порода животного</span>
+                    <select id="pet_kind" name="pet[kind]" class="form-select">
+                        <option value="17">Беспородная</option>
+                        <option value="18">Ангорская</option>
+                        <option value="19">Бирманская</option>
+                        <option value="20">Британская</option>
+                    </select>
+                </div>
             </div>
             <div class="button">
                 <input type="submit" value="Добавить">

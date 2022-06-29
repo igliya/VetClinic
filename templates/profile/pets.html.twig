@@ -22,8 +22,9 @@
             <tr>
                 <th scope="col">Кличка</th>
                 <th scope="col">Вид</th>
+                <th scope="col">Порода</th>
                 <th scope="col">Пол</th>
-                <th scope="col">День рождения</th>
+                <th scope="col">Дата рождения</th>
                 <th scope="col"></th>
             </tr>
             </thead>
@@ -32,6 +33,7 @@
                 <tr>
                     <td>{{ pet.name }}</td>
                     <td>{{ pet.kind }}</td>
+                    <td>Беспородная</td>
                     <td>
                         {% if pet.sex %}
                             {{ 'М' }}
